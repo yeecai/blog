@@ -1,12 +1,10 @@
-2020-11-16-CSSLayout
 
 
+1. **Full-screen layout**
 
-1. Fullscreen layout
+   Header, footer with a fixed height, and the main stretch the rest height. 
 
    [<img src="{{ site.baseurl }}/images/layout/image-20201116173429399.png" alt="Fullscreen layout" style="width: 400px;"/>]({{ site.baseurl }}/)
-
-   code:
 
 ```html
 <div class="fullscreen-layout">
@@ -15,6 +13,8 @@
     <footer></footer>
 </div>
 ```
+
+absolute+
 
 ```scss
 .fullscreen-layout {
@@ -42,34 +42,30 @@
         background-color: #3C9;
     }
     aside {
-        left: 0;
-        top: 50px;
-        bottom: 50px;
-        width: 50px;
+		height: 100%;
+		width: 100px;
 		background-color: #39C;
-    }
+	}
 }
 ```
 
 
 
-2.  Two columns:
+2.  **Two columns**
 
    Left column with fixed width, the right column fits the rest, and two columns same height.
 
    ![两列布局](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1c9804b4659f4f42ad11463ae49bdb8e~tplv-k3u1fbpfcp-zoom-1.image)
 
-   code: 
-
    ```html
-   <div class="two-column-layout">
+<div class="two-column-layout">
    	<div class="left"></div>
        <div class='right'></div>
    </div>
    ```
-
+   
    ```scss
-   .two-column-layout {
+.two-column-layout {
        width: 400px;
        height: 400px;
        .left, .right {
@@ -101,7 +97,7 @@
        }
    }
    ```
-
+   
    
 
 3. Three columns layout
@@ -172,13 +168,13 @@ code
 
 4. Grail-layout 
 
-   use margin or padding or flexbox to create.
+   Can use margin or padding or flexbox to create holy grail layout.
 
    ```html
    <div class="grail-layout">
        <div class="left"></div>
-       <div class="right"></div>
        <div class="center"></div>
+       <div class="right"></div>
    </div>
    ```
 
@@ -206,22 +202,38 @@ code
 
    
 
+   padding:
+
+   We need move the right div in front of the center div otherwise the right one would sink to a new line.
+
+   ```
+   <div class="grail-layout">
+       <div class="left"></div>
+    <div class="center"></div>
+       <div class="right"></div>
+</div>
+   ```
+   
    
 
-   padding：
-
    ```css
-   .grail-layout {
+.grail-layout {
        padding: 0 100px;
-    .left, right, center {
+       width: 400px;
+       height: 400px;
+       .left, .right, .center {
    		height: 100%;
-	}
+   	}
+   	.left, .right {
+   		width: 100px;
+   	}
        .left {
+           float: left;
            margin-left: -100px;
-           width: 100px;
-        background-color: #F66;
+           background-color: #F66;
        }
-    .right {
+       .right {
+           float: right;
            margin-right: -100px;
            background-color: #66F;
        }
@@ -233,12 +245,14 @@ code
    
    margin + float: 
    
+   the html code same with above and same reason, float element need to put before the non-float element in the same line.
+   
    ```css
    .grail-layout {
-       .left, right, center {
+       .left, .right, .center {
    		height: 100%;
    	}
-       .left,  .right {
+       .left, .right {
            width: 100px;
        }
        .left {
@@ -258,7 +272,61 @@ code
    
    
    
+   5. Average layout
    
+      Each one equally split the width.
+   
+      ````html
+      <div class="average-layout">
+          <div class="one"></div>
+          <div class="two"></div>
+          <div class="three"></div>
+          <div class="four"></div>
+      </div>
+      ````
+   
+      solution1: flex = 1
+   
+      ```scss
+      .average-layout {
+      	display: flex;
+          width: 400px;
+          height: 400px;
+      	div {
+      		flex: 1;
+              border-left: 1px solid pink;
+      	}
+      }
+      ```
+   
+      solution2:  float + width
+   
+      ```scss
+      .average-layout {
+      	display: flex;
+          width: 400px;
+          height: 400px;
+      	div {
+              float: right;
+              width: calc(100% / 4);
+              border-left: 1px solid pink;
+      	}
+      }
+      ```
+   
+      solution3: 
+   
+      ```scss
+      .average-layout {
+          column-count: 4;
+          column-gap: 0;
+          width: 400px;
+          height: 400px;
+          div {
+              height: 100%;
+          }
+      }
+      ```
 
 Picture and source code referred from [玩转CSS的艺术之美](https://juejin.im/book/6850413616484040711)
 
