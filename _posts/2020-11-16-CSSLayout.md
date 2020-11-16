@@ -184,22 +184,22 @@ code
 
    flex:
 
-   ```
+   ```css
    .grail-layout {
        display: flex;
        width: 400px;
        height: 400px;
        .left {
            width: 100px;
-           background-color: #f66;
+           background-color: #F66;
        }
        .center {
            flex: 1;
-           background-color: #3c9;
+           background-color: #3C9;
        }
        .right {
            width: 100px;
-           background-color: #66f;
+           background-color: #66F;
        }
    }
    ```
@@ -208,20 +208,56 @@ code
 
    
 
-   margin：
-
-   ```css
-   
-   ```
-
    padding：
 
    ```css
-   
+   .grail-layout {
+       padding: 0 100px;
+    .left, right, center {
+   		height: 100%;
+	}
+       .left {
+           margin-left: -100px;
+           width: 100px;
+        background-color: #F66;
+       }
+    .right {
+           margin-right: -100px;
+           background-color: #66F;
+       }
+       .center {
+           background-color: #3C9;
+       }
+   }
    ```
-
    
-
+   margin + float: 
+   
+   ```css
+   .grail-layout {
+       .left, right, center {
+   		height: 100%;
+   	}
+       .left,  .right {
+           width: 100px;
+       }
+       .left {
+           float: left;
+           background-color: #F66;
+       }
+       .right {
+           float: right;
+           background-color: #66F;
+       }
+       .center {
+           margin: 0 100px;
+           background-color: #3C9;
+       }
+   }
+   ```
+   
+   
+   
    
 
 Picture and source code referred from [玩转CSS的艺术之美](https://juejin.im/book/6850413616484040711)
